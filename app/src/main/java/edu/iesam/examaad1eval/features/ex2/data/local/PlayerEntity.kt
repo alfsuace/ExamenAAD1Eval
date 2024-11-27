@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 const val PLAYER_TABLE = "player"
 @Entity(tableName = PLAYER_TABLE)
 data class PlayerEntity (
-    @PrimaryKey @ColumnInfo(name = "id") val id,
+    @PrimaryKey @ColumnInfo(name = "id") val id: String,
     @ColumnInfo(name = "name") val name: String
 
 )

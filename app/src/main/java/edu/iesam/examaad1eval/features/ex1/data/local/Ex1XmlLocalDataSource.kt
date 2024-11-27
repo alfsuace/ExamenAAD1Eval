@@ -16,26 +16,21 @@ class Ex1XmlLocalDataSource(private val context: Context) {
         context.getString(R.string.ex1), Context.MODE_PRIVATE
     )
 
-    fun saveUsers(users: List<User>) {
-        sharedPref.edit {
-            users.forEach {
-                putString(it.id, gson.toJson(it))
-            }
-        }
-    }
-
     fun getUsers(): List<User> {
         val users = mutableListOf<User>()
         sharedPref.all.values.forEach {
-            users.add(gson.fromJson(it as String, User::class.java))
+            when(gson.fromJson(it.toString(), User::class.java)){
+                is User -> users.add(gson.fromJson(it as String, User::class.java))
+            }
         }
         return users
     }
 
-    fun saveItems(items: List<Item>) {
+    fun saveUsers(users: List<User>) {
         sharedPref.edit {
-            items.forEach {
-                putString(it.id, gson.toJson(it))
+            users.forEach {
+                putString("usersId ${it.id}", gson.toJson(it))
+                apply()
             }
         }
     }
@@ -43,15 +38,18 @@ class Ex1XmlLocalDataSource(private val context: Context) {
     fun getItems(): List<Item> {
         val items = mutableListOf<Item>()
         sharedPref.all.values.forEach {
-            items.add(gson.fromJson(it as String, Item::class.java))
+            when(gson.fromJson(it as String, Item::class.java)){
+                is Item -> items.add(gson.fromJson(it, Item::class.java))
+            }
         }
         return items
     }
 
-    fun saveServices(services: List<Services>) {
+    fun saveItems(items: List<Item>) {
         sharedPref.edit {
-            services.forEach {
-                putString(it.id, gson.toJson(it))
+            items.forEach {
+                putString("itemsId ${it.id}", gson.toJson(items))
+                apply()
             }
         }
     }
@@ -59,8 +57,19 @@ class Ex1XmlLocalDataSource(private val context: Context) {
     fun getServices(): List<Services> {
         val services = mutableListOf<Services>()
         sharedPref.all.values.forEach {
-            services.add(gson.fromJson(it as String, Services::class.java))
+            when(gson.fromJson(it as String , Services::class.java)){
+                is Services -> services.add(gson.fromJson(it, Services::class.java))
+            }
         }
         return services
+    }
+
+    fun saveServices(services: List<Services>) {
+        sharedPref.edit {
+            services.forEach {
+                putString("servicesId ${it.id}", gson.toJson(it))
+                apply()
+            }
+        }
     }
 }

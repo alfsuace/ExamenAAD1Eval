@@ -33,14 +33,14 @@ class Ex1DataRepository(
         }
     }
 
-    override fun getServices(): List<Services> {
-        val services = localDataSource.getServices()
-        if (services.isEmpty()) {
-            val servicesFromRemote = remoteDataSource.getServices()
-            localDataSource.saveServices(servicesFromRemote)
-            return servicesFromRemote
-        }else{
-            return services
+   override fun getServices(): List<Services> {
+       val services = localDataSource.getServices()
+       if (services.isEmpty()) {
+           val servicesFromRemote = remoteDataSource.getServices()
+           localDataSource.saveServices(servicesFromRemote)
+           return servicesFromRemote
+       } else {
+           return services
         }
     }
 }

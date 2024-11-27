@@ -24,9 +24,9 @@ class MainActivity : AppCompatActivity() {
             Ex1XmlLocalDataSource(this)
         )
 
-        Log.d("Users", dataRepo.getUsers().toString())
-        Log.d("Items", dataRepo.getItems().toString())
-        Log.d("Services", dataRepo.getServices().toString())
+        Log.d("@Dev", dataRepo.getUsers().toString())
+        Log.d("@Dev", dataRepo.getItems().toString())
+        Log.d("@Dev", dataRepo.getServices().toString())
     }
 
     @OptIn(DelicateCoroutinesApi::class)

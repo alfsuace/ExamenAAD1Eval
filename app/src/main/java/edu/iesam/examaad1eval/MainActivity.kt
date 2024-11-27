@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
                    DbProvider.provideDb(this@MainActivity).playerDao(),
                 )
             )
+            Log.d("@Dev", db.getGames().toString())
         }
     }
 }
